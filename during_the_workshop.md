@@ -20,6 +20,8 @@ To make ssh easier you should add your **public key** to the `authorized_keys` f
 vi ~/.ssh/authorized_keys
 ```
 
+This removes the need to provide a username and password everytime (if you've forgotten how to setup an SSH key please follow [this guide](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key), skipping the step for creating a username/password) 
+
 ### Getting started with Chimera
 The VM has a, partially, working version of Chimera on it. If you navigate to the URL provided by your trainer you should be able to see the page it produces. The `webapp` part appears to be functioning correctly, you should leave it alone.
 
