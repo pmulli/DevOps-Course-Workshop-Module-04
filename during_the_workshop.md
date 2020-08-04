@@ -1,4 +1,6 @@
-## Workshop Instructions
+# Workshop Instructions
+
+## Part 1
 
 ### SSH to your VM
 
@@ -83,6 +85,8 @@ We've got some requirements from the CEO:
 * All hourly datasets for the last 24 hours should also be kept accessible.
 * Any hourly datasets older than 24 hours should be automatically deleted.
 
+## Part 2
+
 ### Creating a local environment
 
 Now you've got the CEO happy it's time to start creating a local development environment. We've started you off by creating a skeleton [Vagrantfile](./VagrantFile) with some hints as to what different steps there are.
@@ -101,8 +105,19 @@ The CEO has come back with some more requirements for you.
 * The USGS has more than just the hourly data feed.
 * You might want to add some parameters to your script, if you haven't already.
 
-### Document `cliapp`
+### (Stretch goal) Document `cliapp`
 
 If you run `cliapp --help` you'll see lots of different options that can be passed to the program. We've documented some of these in [cliapp_reference.md](./cliapp_reference.md) but some are a complete mystery.
 
 Can you work out what they do and complete the documentation?
+
+### (Stretch goal) Create an API
+
+While command line programs are very useful in certain circumstances they do have their limitations. We would like to create an API that makes the data produced by `cliapp` available as JSON, rather than through the rather clunky `webapp`.
+
+Use your existing knowledge of Flask (and documentation from the internet) to create an API on your local Vagrant box. Your initial goal should be to create an endpoing to `GET` a dataset based on its name:
+```
+// e.g. GET the dataset called `edge-throw-except`
+GET http://localhost/dataset/edge-throw-except
+```
+Once you have this working consider other improvements. A `GET` endpoint to list all the currently available datasets? A `POST` endpoint that accepts input data and options and invokes `cliapp` with them? There are lots of possibilities.
