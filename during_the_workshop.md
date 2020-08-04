@@ -75,7 +75,7 @@ We want to use [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.
 
 #### Tips
 * Use `curl` to save a copy of the JSON feed locally (it's quicker than downloading it everytime.)
-* The command line program `jq` is very useful for manipulating JSON data. You can find it's manual [here](https://stedolan.github.io/jq/manual/)
+* The command line program `jq` is very useful for manipulating JSON data. You can find its manual [here](https://stedolan.github.io/jq/manual/)
 
 ### Automation Part 1
 When you've written your script we need to automate it. You'll want to use `crontab` to call the script.
