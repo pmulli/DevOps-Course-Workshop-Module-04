@@ -55,7 +55,7 @@ touch some_file_name
 cliapp -i some_file_name
 ```
 
-The result should be very similar to running the program without any arguments. This isn't surprising as our input file is currently blank.
+The result should be very similar to running the pvagranrogram without any arguments. This isn't surprising as our input file is currently blank.
 
 Open your input file using `vi` and add the following line and run `cliapp` again. What happens?
 ```bash
@@ -91,7 +91,7 @@ We've got some requirements from the CEO:
 
 ### Creating a local environment
 
-Now you've got the CEO happy it's time to start creating a local development environment. We've started you off by creating a skeleton [Vagrantfile](./VagrantFile) with some hints as to what different steps there are.
+Now you've got the CEO happy it's time to start creating a local development environment. We've started you off by creating a skeleton [Vagrantfile](./Vagrantfile) with some hints as to what different steps there are.
 
 You'll want to copy `webapp` and `cliapp` from your remote VM to use in your local environment.
 
