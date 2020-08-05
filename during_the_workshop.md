@@ -55,7 +55,7 @@ touch some_file_name
 cliapp -i some_file_name
 ```
 
-The result should be very similar to running the pvagranrogram without any arguments. This isn't surprising as our input file is currently blank.
+The result should be very similar to running the program without any arguments. This isn't surprising as our input file is currently blank.
 
 Open your input file using `vi` and add the following line and run `cliapp` again. What happens?
 ```bash
