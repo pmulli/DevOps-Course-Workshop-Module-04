@@ -1,6 +1,6 @@
 # Workshop Instructions
 
-## Part 1
+## Part 1 (Morning)
 
 ### SSH to your VM
 
@@ -87,7 +87,7 @@ We've got some requirements from the CEO:
 * All hourly datasets for the last 24 hours should also be kept accessible.
 * Any hourly datasets older than 24 hours should be automatically deleted.
 
-## Part 2
+## Part 2 (Afternoon)
 
 ### Creating a local environment
 
@@ -98,6 +98,8 @@ You'll want to copy `webapp` and `cliapp` from your remote VM to use in your loc
 Hint: `scp` might be a helpful program for copying files from a remote machine.
 
 ### Automation Part 2
+*If you haven't finished all of the morning tasks you'll want to finish these before starting the next steps*
+
 The CEO has come back with some more requirements for you.
 
 * At midnight everyday the script should create a summary of the last 24 hours. It should be called `yesterday`.
