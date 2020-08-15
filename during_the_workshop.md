@@ -15,7 +15,7 @@ You should now be connected to the remote VM. Try a few simple shell commands to
 
 The preferred method of connecting is with SSH keys. This removes the need to provide a username and password every time, and is more secure. (If you've forgotten how to setup an SSH key please follow [this guide](https://docs.github.com/en/github/authenticating-to-github/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#generating-a-new-ssh-key), skipping the step for creating a username/password).
 
-You should add your **public key** to the `authorized_keys` file on the remote VM.
+You should add your **public key** to the `authorized_keys` file on the remote VM. If you have spent longer than 15 minutes on connecting to the VM, then you can skip this for now.
 
 ```bash
 # Opening the authorized_keys file for editing
