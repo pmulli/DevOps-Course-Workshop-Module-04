@@ -26,7 +26,7 @@ vi ~/.ssh/authorized_keys
 ### Getting started with Chimera
 The VM has a, partially, working version of Chimera on it. If you navigate to the URL provided by your trainer you should be able to see the page it produces. The `webapp` part appears to be functioning correctly, you should leave it alone.
 
-On the VM you should be able to find `cliapp`. This is a command line program that you should be able to run like so:
+On the VM you should be able to find `cliapp`. This is a command line program with minimal documentation (see [cliapp_reference.md](./cliapp_reference.md)). You should be able to run it like so:
 
 ```bash
 cliapp --version
@@ -87,7 +87,7 @@ When you've written your script we need to automate it. You'll want to use `cron
 We've got some requirements from the CEO:
 * The "last hour" dataset should be regenerated every five minutes.
 * The dataset should include the date and time it was generated in its name.
-* Using `latest` should always return the latest hourly dataset.
+* Opening the site at `/latest` should always display the latest hourly dataset. Hint: there is a useful option listed in the cliapp documentation
 * All hourly datasets for the last 24 hours should also be kept accessible.
 * Any hourly datasets older than 24 hours should be automatically deleted.
 
