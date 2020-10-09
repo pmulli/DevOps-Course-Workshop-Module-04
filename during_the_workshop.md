@@ -58,7 +58,7 @@ cliapp -i some_file_name
 
 The result should be very similar to running the program without any arguments. This isn't surprising as our input file is currently blank.
 
-Open your input file using `vi` and add the following line and run `cliapp` again. What happens?
+Open your input file using `vi` and add the following line and run `cliapp -i some_file_name` again. What happens?
 ```bash
 59.0916|-137.8717|111 km WSW of Covenant Life, Alaska|6.4
 ```
@@ -66,7 +66,7 @@ Open your input file using `vi` and add the following line and run `cliapp` agai
 Hopefully `cliapp` should have generated a non-empty dataset. If you copy the dataset name and paste it onto the end of your URI in your web browser you should see something on the map.
 
 ```bash
-https://{hostname}/{datasetName}
+http://{hostname}/{datasetName}
 ```
 
 ### Data Manipulation
