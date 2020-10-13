@@ -86,8 +86,8 @@ When you've written your script we need to automate it. You'll want to use `cron
 
 We've got some requirements from the CEO:
 * The "last hour" dataset should be regenerated every five minutes.
-* The dataset should include the date and time it was generated in its name.
-* Opening the site at `/latest` should always display the latest hourly dataset. Hint: there is a useful option listed in the cliapp documentation
+* The dataset should include the date and time it was generated in its name. Hint: there is a useful option listed in the cliapp documentation.
+* Opening the site at `/latest` should always display the latest hourly dataset. 
 * All hourly datasets for the last 24 hours should also be kept accessible.
 * Any hourly datasets older than 24 hours should be automatically deleted.
 
