@@ -1,6 +1,6 @@
 # Workshop Instructions
 
-## Part 1 (Morning)
+## Part 1
 
 ### SSH to your VM
 
@@ -75,34 +75,99 @@ Now we know how to feed data into Chimera we need to work out how to do this mor
 We want to use [USGS](https://earthquake.usgs.gov/earthquakes/feed/v1.0/geojson.php) as our source. They have various regularly updated feeds. Start off using the [hourly feed](https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson). We need to write a script to convert this data to the pipe delimited format that `cliapp` can read.
 
 #### Tips
-* Use `curl` to save a copy of the JSON feed locally (it's quicker than downloading it everytime.)
+* Use `curl` to save a copy of the JSON feed locally (it's quicker than downloading it everytime). Use the `-o` option to specify a file to save it to.
 * The command line program `jq` is very useful for manipulating JSON data. You can find its manual [here](https://stedolan.github.io/jq/manual/).
-  * There are also cheatsheets that may provide more helpful examples:
-    * [Cheatsheet 1](https://gist.github.com/olih/f7437fb6962fb3ee9fe95bda8d2c8fa4)
-    * [Cheatsheet 2](https://lzone.de/cheat-sheet/jq)
+  * There is also this [Cheatsheet](https://lzone.de/cheat-sheet/jq) that provides helpful examples.
+  * When operating on some data like: `{"stringProp": "foobar", "intProp": 1}`, then the jq expression `"\(.stringProp) raw text \(.intProp)"` will evaluate to `"foobar raw text 1"`.
+  * The jq command itself has an option `-r` to return string outputs "raw", meaning without wrapping it in quotes.
+
+<details>
+<summary>If you are really stuck, expand this for more detailed help.</summary>
+
+Read your json file and feed it into jq:
+
+```
+cat earthquakes.json | jq
+```
+  
+<details>
+<summary>Next step</summary>
+
+The downloaded JSON contains far more data than you need. The outer object has a field called "features" which is the actual list of earthquakes.
+
+```
+cat earthquakes.json | jq '.features'
+```
+
+<details>
+<summary>Next step</summary>
+
+To loop over the list and evaluate an expression on each, you can use `[]` and jq's own pipe operator.
+
+```
+cat earthquakes.json | jq '.features[] | .geometry'
+```
+
+<details>
+<summary>Next step</summary>
+
+Access nested values by chaining dots. Combine values with string interpolation.
+
+```
+cat earthquakes.json | jq '.features[] | "\(.geometry.coordinates[0])|\(.properties.place)"'
+```
+<details>
+<summary>Complete command</summary>
+
+```
+cat earthquakes.json | jq -r '.features[] | "\(.geometry.coordinates[1])|\(.geometry.coordinates[0])|\(.properties.place)|\(.properties.mag)"'
+```
+
+</details>
+</details>
+</details>
+</details>
+</details>
+<br>
 
 ### Automation Part 1
-When you've written your script we need to automate it. You'll want to use `crontab` to call the script.
+When you've written your script we need to automate it. You'll want to use `crontab` to call the script
+
+A summary of crontab and some tips:
+  
+* Use `crontab -e` to edit the crontab, which is simply a file listing scheduled jobs.
+* Each line is a job, given by a cron expression (specifying when it should run) and then a command to run.
+* Each user has their own crontab. It will execute as them, and in their home directory
+* An important difference between the cronjob execution and running the command yourself in bash is that the cronjob will not have run the `~/.bash_profile` file beforehand.
+* You can experiment with the meaning of cron expressions [here](https://crontab.guru/)
+* You might be wondering how to check the output of your cron jobs. After it runs, and you next interact with the terminal, you will see a message in the terminal saying "You have new mail". You can read the file it tells you about with `cat` or `tail`. E.g. `cat /var/spool/mail/ec2-user`.
 
 We've got some requirements from the CEO:
-* The "last hour" dataset should be regenerated every five minutes.
-* The dataset should include the date and time it was generated in its name. Hint: there is a useful option listed in the cliapp documentation.
-* Opening the site at `/latest` should always display the latest hourly dataset. 
-* All hourly datasets for the last 24 hours should also be kept accessible.
-* Any hourly datasets older than 24 hours should be automatically deleted.
+* A dataset should be generated every five minutes, containing earthquakes in the last hour. **Hint:** there is an option listed in the cliapp documentation for the dataset name.
+* The dataset should include the date and time it was generated in its name. **Hint:** Use the `date` command
+* There should also be a dataset called "latest" which contains the latest data. So opening the site at `/latest` should always display the latest hourly dataset. 
+* Any datasets older than 24 hours should be automatically deleted. More recent ones should be kept accessible. **Hint:** Use the `find` command on the folder containing the datasets. It has options to filter by date/time last modified, and an option to delete the files it finds
 
-## Part 2 (Afternoon)
+## Part 2
 
 ### Creating a local environment
 
 Now you've got the CEO happy it's time to start creating a local development environment. We've started you off by creating a skeleton [Vagrantfile](./Vagrantfile) with some hints as to what different steps there are.
 
-You'll want to copy `webapp` and `cliapp` from your remote VM to use in your local environment.
+Run `vagrant up` in a directory containing a file called `Vagrantfile` and it will create a VM based on that file's instructions. By default, any files in the current directory will also sync the current folder with a folder at `/vagrant` inside the VM.
+
+So to give the Vagrant VM a copy of the `webapp` and `cliapp` executables, you need to copy them from your remote VM into the same folder as your Vagrantfile.
 
 Hint: `scp` might be a helpful program for copying files from a remote machine.
+  
+Your Vagrantfile will need to:
+
+* Set up [port forwarding](https://www.vagrantup.com/docs/networking/forwarded_ports). This means requests from your browser will get forwarded to the VM and you can actually visit the web app.
+* Set up a [provisioning script](https://www.vagrantup.com/docs/provisioning/shell). This script should prepare the environment and install any required tools
+* Use a [trigger](https://www.vagrantup.com/docs/triggers) to start up the webapp after you run "up". (You can just run the `webapp` executable directly).
 
 ### Automation Part 2
-*If you haven't finished all of the morning tasks you'll want to finish these before starting the next steps*
+*If you haven't finished "Automation Part 1" yet, do so before starting the next steps*
 
 The CEO has come back with some more requirements for you.
 
