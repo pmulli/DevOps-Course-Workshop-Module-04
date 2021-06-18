@@ -189,7 +189,6 @@ Useful Vagrant commands:
 - `vagrant destroy` will totally remove the VM from your computer
 - `vagrant provision` or `vagrant up --provision` will get your VM to run an updated provisioning script.
 
-
 ### Automation Part 2
 *If you haven't finished "Automation Part 1" yet, do so before starting the next steps*
 
