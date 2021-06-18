@@ -211,7 +211,7 @@ Can you work out what they do and complete the documentation?
 
 While command line programs are very useful in certain circumstances they do have their limitations. We would like to create an API that makes the data produced by `cliapp` available as JSON, rather than through the rather clunky `webapp`.
 
-Use your existing knowledge of Flask (and documentation from the internet) to create an API on your local Vagrant box. Your initial goal should be to create an endpoing to `GET` a dataset based on its name:
+Use your existing knowledge of Flask (and documentation from the internet) to create an API on your local Vagrant box. Your initial goal should be to create an endpoint to `GET` a dataset based on its name:
 ```
 // e.g. GET the dataset called `edge-throw-except`
 GET http://localhost/dataset/edge-throw-except
