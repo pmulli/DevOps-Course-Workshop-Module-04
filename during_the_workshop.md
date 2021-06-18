@@ -171,13 +171,17 @@ Run `vagrant up` in a directory containing a file called `Vagrantfile` and it wi
 
 So to give the Vagrant VM a copy of the `webapp` and `cliapp` executables, you need to copy them from your remote VM into the same folder as your Vagrantfile.
 
-Hint: `scp` might be a helpful program for copying files from a remote machine.
-  
+<details><summary>Hint</summary>
+
+The `which` command might be helpful to find the location of the `cliapp` and `webapp` executables, and `scp` can be used for copying files from a remote machine</details>
+
 Your Vagrantfile will need to:
 
 * Set up [port forwarding](https://www.vagrantup.com/docs/networking/forwarded_ports). This means requests from your browser will get forwarded to the VM and you can actually visit the web app.
 * Set up a [provisioning script](https://www.vagrantup.com/docs/provisioning/shell). This script should prepare the environment and install any required tools. It is intended as something you run once.
 * Use a [trigger](https://www.vagrantup.com/docs/triggers) to start up the webapp after you run "up". (You can just run the `webapp` executable directly).
+
+There are a few provisioning steps required to get `webapp` running on the Vagrant VM. You're not supposed to know what they are yet, or even what port to forward! If you're not sure where to start use `vagrant ssh` to log in to the VM, then try running the `webapp` file you copied and see what happens.
 
 Useful Vagrant commands:
 - `vagrant ssh` will ssh into the Vagrant managed VM
